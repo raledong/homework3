@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * author: rale
  * createdAt: 1/20/19
@@ -20,6 +23,25 @@ public class LevelTraversal {
      *    3.队列（Queue）
      */
     public String traverse(TreeNode root) {
-        return "";
+        if (root == null) {
+            return "";
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+
+        StringBuilder result = new StringBuilder();
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            result.append(current.getLetter());
+
+            if (current.getLeftChild() != null) {
+                queue.offer(current.getLeftChild());
+            }
+
+            if (current.getRightChild() != null) {
+                queue.offer(current.getRightChild());
+            }
+        }
+        return result.toString();
     }
 }
